@@ -23,6 +23,7 @@
   --ink-08:rgba(28,31,34,.08);
   --accent-soft:#D9E7EE;
   --accent-deep:#5E8DA1;
+  --stamp-ink:#C23B2B;
 
   /* asymmetric corners — never uniform */
   --r-lg: 34px 6px 34px 6px;
@@ -251,6 +252,11 @@ h1 .soft{color:rgba(28,31,34,.56)}
   transition:clip-path 1.08s var(--ease-peel);
 }
 .card.peeled .sticker-face{clip-path:polygon(0 0, 0 0, 0 0)}
+/* the sticker offers you a corner before you touch it */
+.card.lift:not(.peeled) .sticker-face,
+.card.lift:not(.peeled) .curl{transition-duration:.4s;transition-timing-function:var(--ease-out)}
+.card:not(.peeled):hover .sticker-face,
+.card:not(.peeled):focus-visible .sticker-face{clip-path:polygon(0 0, 181% 0, 0 181%)}
 .hello-band{
   margin:calc(clamp(18px,2.8vw,26px) * -1) calc(clamp(18px,2.8vw,26px) * -1) 0;
   padding:14px 22px 12px;
@@ -300,6 +306,48 @@ h1 .soft{color:rgba(28,31,34,.56)}
   font-size:clamp(22px,3vw,31px);
 }
 .card.fresh .written .pre{opacity:0}
+/* the new kid writes their own name tag */
+.card.fresh .written b{
+  display:inline-block;      /* so the stroke maps to the text, not the whole box */
+  position:relative;
+}
+.card.fresh .written b span{
+  display:inline-block;
+  clip-path:inset(0 100% 0 0);
+  animation:handwrite 1.75s linear .85s both;
+}
+.card.fresh .written b::after{
+  content:"";
+  position:absolute;top:6%;left:0;
+  width:7px;height:7px;
+  background:var(--accent-deep);
+  border-radius:99px 2px 99px 2px;
+  animation:nib 1.75s linear .85s both;
+}
+@keyframes handwrite{
+  0%{clip-path:inset(0 100% 0 0)}
+  12%{clip-path:inset(0 86% 0 0)}
+  19%{clip-path:inset(0 81% 0 0)}
+  34%{clip-path:inset(0 60% 0 0)}
+  43%{clip-path:inset(0 55% 0 0)}
+  58%{clip-path:inset(0 36% 0 0)}
+  71%{clip-path:inset(0 24% 0 0)}
+  85%{clip-path:inset(0 9% 0 0)}
+  100%{clip-path:inset(0 0 0 0)}
+}
+@keyframes nib{
+  0%{left:0;opacity:0}
+  6%{opacity:1}
+  12%{left:14%}
+  19%{left:19%}
+  34%{left:40%}
+  43%{left:45%}
+  58%{left:64%}
+  71%{left:76%}
+  85%{left:91%}
+  96%{left:100%;opacity:1}
+  100%{left:100%;opacity:0}
+}
 
 /* ---------- the curling corner ---------- */
 .curl{
@@ -345,11 +393,23 @@ h1 .soft{color:rgba(28,31,34,.56)}
 
 /* group photo */
 .photo{
+  position:relative;
   background:#fff;
   border:1px solid var(--ink-14);
   border-radius:var(--r-lg);
   padding:clamp(22px,3.4vw,40px) clamp(16px,3vw,34px) clamp(18px,2.4vw,26px);
   box-shadow:0 26px 60px -40px rgba(28,31,34,.6);
+}
+.photo::after{
+  content:"";position:absolute;inset:0;
+  background:#fff;border-radius:inherit;
+  opacity:0;pointer-events:none;
+}
+.finale.show .photo::after{animation:flash .58s ease-out .58s both}
+@keyframes flash{
+  0%{opacity:0}
+  10%{opacity:.94}
+  100%{opacity:0}
 }
 .lineup{
   display:flex;justify-content:center;align-items:flex-end;
@@ -379,7 +439,30 @@ h1 .soft{color:rgba(28,31,34,.56)}
 .mini:nth-child(2){--tilt:1.6deg}
 .mini:nth-child(3){--tilt:-1.2deg}
 .mini:nth-child(4){--tilt:2.4deg}
-.mini:hover{transform:rotate(0deg) translateY(-4px);transition:transform .35s var(--ease-bounce)}
+/* once the pop-in is done, CSS takes the transform back so hover can work */
+.mini.settled{animation:none!important;opacity:1;transform:rotate(var(--tilt,0deg));transition:transform .38s var(--ease-bounce)}
+.mini.settled:hover{transform:rotate(0deg) translateY(-7px) scale(1.035);z-index:2}
+/* ...and the neighbours lean away, like you nudged the group photo */
+.mini.settled:hover + .mini.settled{transform:rotate(5.5deg) translateY(4px)}
+.mini.settled:has(+ .mini.settled:hover){transform:rotate(-5.5deg) translateY(4px)}
+
+/* the shared family name snaps into one column as they settle */
+.mini .m-name small{
+  transition:transform .72s var(--ease-bounce);
+}
+.mini:nth-child(1) .m-name small{transform:translate(7px,-4px) rotate(-3.4deg)}
+.mini:nth-child(2) .m-name small{transform:translate(-6px,3px) rotate(2.6deg)}
+.mini:nth-child(3) .m-name small{transform:translate(5px,4px) rotate(-1.9deg)}
+.mini:nth-child(4) .m-name small{transform:translate(-7px,-3px) rotate(3.2deg)}
+.finale.show .mini .m-name small{
+  transform:none;
+  transition-delay:1.02s;
+  animation:snapflash 1s ease 1.02s both;
+}
+@keyframes snapflash{
+  0%,38%{color:var(--accent-deep)}
+  100%{color:var(--ink-45)}
+}
 .mini .m-band{
   font-family:"IBM Plex Mono",ui-monospace,monospace;
   font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;
@@ -446,19 +529,28 @@ h1 .soft{color:rgba(28,31,34,.56)}
   margin:52px 0 0;
   font-family:"IBM Plex Mono",ui-monospace,monospace;
   font-size:clamp(12.5px,1.5vw,16px);letter-spacing:.19em;text-transform:uppercase;font-weight:600;
-  color:var(--ink);
+  color:var(--stamp-ink);
   padding:15px 26px;
-  border:2px solid var(--ink);
-  outline:1px solid var(--ink);
+  border:2px solid var(--stamp-ink);
+  outline:1px solid var(--stamp-ink);
   outline-offset:5px;
   border-radius:var(--r-sm);
   transform:rotate(-2.6deg);
+  opacity:0;
+  mix-blend-mode:multiply;
 }
-.finale.show .stamp{animation:thud .62s var(--ease-bounce) 1.68s both}
+.stamp.stamped{animation:thud .58s var(--ease-bounce) both}
+.msg:has(.stamp.stamped){animation:jolt .34s ease-out}
+@keyframes jolt{
+  0%{transform:none}
+  24%{transform:translateY(2.5px)}
+  52%{transform:translateY(-1.5px)}
+  100%{transform:none}
+}
 @keyframes thud{
-  0%{opacity:0;transform:rotate(-9deg) scale(1.55)}
-  58%{opacity:1;transform:rotate(-1.2deg) scale(.955)}
-  100%{opacity:1;transform:rotate(-2.6deg) scale(1)}
+  0%{opacity:0;transform:rotate(-9deg) scale(1.6)}
+  55%{opacity:.94;transform:rotate(-1.1deg) scale(.95)}
+  100%{opacity:.92;transform:rotate(-2.6deg) scale(1)}
 }
 .roofpara{
   margin:30px 0 0;max-width:64ch;
@@ -530,7 +622,16 @@ h1 .soft{color:rgba(28,31,34,.56)}
   .finale{transition:opacity .3s linear}
   .finale.show .mini{animation:none;opacity:1;transform:none}
   .not .strike span{background-size:100% 4px!important;transition:none}
-  .finale.show .stamp{animation:none;opacity:1;transform:rotate(-2.6deg)}
+  .stamp{opacity:.92}
+  .mini .m-name small{transform:none!important;transition:none;animation:none}
+  .finale.show .photo::after{animation:none;opacity:0}
+  .msg:has(.stamp.stamped){animation:none}
+  .card.fresh .written b span{clip-path:none;animation:none}
+  .card.fresh .written b::after{display:none}
+  .card:not(.peeled):hover .sticker-face,
+  .card:not(.peeled):focus-visible .sticker-face{clip-path:none}
+  .mini.settled,.mini.settled:hover,.mini.settled:hover + .mini.settled{transform:none;transition:none}
+  .stamp.stamped{animation:none;opacity:.92;transform:rotate(-2.6deg)}
   .stamp-chip{transform:none}
   #confetti{display:none}
 }
@@ -675,7 +776,7 @@ h1 .soft{color:rgba(28,31,34,.56)}
         <span class="sticker" aria-hidden="true">
           <span class="sticker-face">
             <span class="hello-band"><b>HELLO</b><em>my name is</em></span>
-            <span class="written"><span class="pre">&nbsp;</span><b>Hi, I'm new here!</b></span>
+            <span class="written"><span class="pre">&nbsp;</span><b><span>Hi, I'm new here!</span></b></span>
             <span class="hint">click or tap to peel</span>
           </span>
           <span class="curl"></span>
@@ -800,26 +901,33 @@ h1 .soft{color:rgba(28,31,34,.56)}
   var live = document.getElementById('live');
 
   /* ---------- curl placement: sits on the travelling diagonal ---------- */
-  function placeCurl(card, peeled){
+  var T = { peeled: -0.06, hover: 0.905, rest: 1.12 };
+  function placeCurl(card, state){
     var curl = card.querySelector('.curl');
     if(!curl) return;
     var box = card.querySelector('.card-inner').getBoundingClientRect();
     var w = box.width, h = box.height;
     if(!w || !h) return;
     var ang = -Math.atan2(h, w) * 180 / Math.PI;   /* align with the cut edge */
-    var t = peeled ? -0.06 : 1.12;                 /* midpoint of the diagonal */
+    var t = T[state] != null ? T[state] : T.rest;  /* midpoint of the diagonal */
     var x = t * w, y = t * h;
     curl.style.transform = 'translate(-50%,-50%) translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) rotate(' + ang.toFixed(2) + 'deg)';
   }
   function placeAll(){
-    cards.forEach(function(c){ placeCurl(c, c.classList.contains('peeled')); });
+    cards.forEach(function(c){ placeCurl(c, c.classList.contains('peeled') ? 'peeled' : 'rest'); });
+  }
+  function lift(card, on){
+    if(reduce.matches || card.classList.contains('peeled')) return;
+    card.classList.add('lift');
+    placeCurl(card, on ? 'hover' : 'rest');
   }
 
   /* ---------- confetti ---------- */
   var cv = document.getElementById('confetti');
   var ctx = cv.getContext('2d');
   var bits = [], raf = null, dpr = 1;
-  var PALETTE = ['#8FB8C9','#1C1F22','#FFFFFF','#D9E7EE','#5E8DA1'];
+  /* scraps, not generic rectangles: torn paper, chips of the HELLO band, little curls */
+  var KINDS = ['paper','paper','paper','band','band','curl','ink'];
 
   function sizeCanvas(){
     dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -834,16 +942,52 @@ h1 .soft{color:rgba(28,31,34,.56)}
     for(var i=0;i<n;i++){
       var a = (Math.PI * 2) * (i/n) + Math.random()*0.5;
       var sp = 3.2 + Math.random()*7.4;
+      var kind = KINDS[(Math.random()*KINDS.length)|0];
       bits.push({
         x:x*dpr, y:y*dpr,
         vx:Math.cos(a)*sp*dpr, vy:(Math.sin(a)*sp - 4.4)*dpr,
-        w:(4+Math.random()*7)*dpr, h:(3+Math.random()*4)*dpr,
+        w:(kind==='ink' ? 3+Math.random()*3 : 5+Math.random()*7)*dpr,
+        h:(kind==='ink' ? 2+Math.random()*2 : 3.5+Math.random()*4)*dpr,
         rot:Math.random()*Math.PI, vr:(Math.random()-.5)*0.32,
-        c:PALETTE[(Math.random()*PALETTE.length)|0],
+        k:kind,
         life:0, max:64+Math.random()*46
       });
     }
     if(!raf) raf = requestAnimationFrame(tick);
+  }
+
+  function drawScrap(b){
+    var w = b.w, h = b.h;
+    if(b.k === 'band'){                      /* chip of the accent HELLO band */
+      ctx.fillStyle = '#8FB8C9';
+      ctx.fillRect(-w/2, -h/2, w, h);
+      return;
+    }
+    if(b.k === 'ink'){                       /* fleck of ink */
+      ctx.fillStyle = '#1C1F22';
+      ctx.fillRect(-w/2, -h/2, w, h);
+      return;
+    }
+    if(b.k === 'curl'){                      /* a little peeled curl */
+      ctx.strokeStyle = '#FFFFFF';
+      ctx.lineWidth = Math.max(1.6, h);
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.arc(0, 0, w * 0.6, Math.PI * 0.15, Math.PI * 1.05);
+      ctx.stroke();
+      ctx.strokeStyle = 'rgba(28,31,34,.32)';
+      ctx.lineWidth = Math.max(0.7, dpr * 0.7);
+      ctx.stroke();
+      return;
+    }
+    /* torn sticker paper: white scrap with a dashed edge */
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillRect(-w/2, -h/2, w, h);
+    ctx.strokeStyle = 'rgba(28,31,34,.42)';
+    ctx.lineWidth = Math.max(0.8, dpr * 0.8);
+    ctx.setLineDash([Math.max(1.5, dpr*1.7), Math.max(1.5, dpr*1.7)]);
+    ctx.strokeRect(-w/2, -h/2, w, h);
+    ctx.setLineDash([]);
   }
 
   function tick(){
@@ -859,8 +1003,7 @@ h1 .soft{color:rgba(28,31,34,.56)}
       ctx.globalAlpha = fade;
       ctx.translate(b.x, b.y);
       ctx.rotate(b.rot);
-      ctx.fillStyle = b.c;
-      ctx.fillRect(-b.w/2, -b.h/2, b.w, b.h);
+      drawScrap(b);
       ctx.restore();
       if(b.life >= b.max || b.y > cv.height + 60) bits.splice(i,1);
     }
@@ -880,16 +1023,18 @@ h1 .soft{color:rgba(28,31,34,.56)}
 
   function peel(card, quiet){
     if(card.classList.contains('peeled')) return;
+    card.classList.remove('lift');
     card.classList.add('peeled');
     card.setAttribute('aria-expanded','true');
-    placeCurl(card, true);
+    placeCurl(card, 'peeled');
     if(!quiet) popAt(card, 30, 620);
     update();
   }
   function stick(card){
     card.classList.remove('peeled');
+    card.classList.remove('lift');
     card.setAttribute('aria-expanded','false');
-    placeCurl(card, false);
+    placeCurl(card, 'rest');
   }
 
   function update(){
@@ -902,6 +1047,13 @@ h1 .soft{color:rgba(28,31,34,.56)}
     if(n === 4) showFinale(); else hideFinale();
   }
 
+  var minis = Array.prototype.slice.call(document.querySelectorAll('.mini'));
+  minis.forEach(function(el){
+    el.addEventListener('animationend', function(e){
+      if(e.animationName === 'popin') el.classList.add('settled');
+    });
+  });
+
   var finaleShown = false;
   function showFinale(){
     if(finaleShown) return;
@@ -909,6 +1061,7 @@ h1 .soft{color:rgba(28,31,34,.56)}
     setTimeout(function(){
       finale.classList.add('show');
       finale.setAttribute('aria-hidden','false');
+      if(reduce.matches) minis.forEach(function(el){ el.classList.add('settled'); });
       closing.classList.add('show');
       if(!reduce.matches){
         var r = finale.getBoundingClientRect();
@@ -919,6 +1072,7 @@ h1 .soft{color:rgba(28,31,34,.56)}
       try{
         finale.scrollIntoView({behavior: reduce.matches ? 'auto' : 'smooth', block:'start'});
       }catch(e){ finale.scrollIntoView(); }
+      watchStamp();
     }, reduce.matches ? 60 : 620);
   }
   function hideFinale(){
@@ -926,11 +1080,34 @@ h1 .soft{color:rgba(28,31,34,.56)}
     finaleShown = false;
     finale.classList.remove('show');
     finale.setAttribute('aria-hidden','true');
+    minis.forEach(function(el){ el.classList.remove('settled'); });
     closing.classList.remove('show');
+  }
+
+  /* ---------- the stamp lands when you scroll to it ---------- */
+  var stamp = document.querySelector('.stamp');
+  var stampWatched = false;
+  function watchStamp(){
+    if(stampWatched || !stamp) return;
+    stampWatched = true;
+    if(!('IntersectionObserver' in window)){ stamp.classList.add('stamped'); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          stamp.classList.add('stamped');
+          io.disconnect();
+        }
+      });
+    }, { threshold: 0.85, rootMargin: '0px 0px -8% 0px' });
+    io.observe(stamp);
   }
 
   /* ---------- wiring ---------- */
   cards.forEach(function(card){
+    card.addEventListener('mouseenter', function(){ lift(card, true); });
+    card.addEventListener('mouseleave', function(){ lift(card, false); });
+    card.addEventListener('focus', function(){ lift(card, true); });
+    card.addEventListener('blur', function(){ lift(card, false); });
     card.addEventListener('click', function(){ peel(card); });
     card.addEventListener('keydown', function(e){
       if(e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar'){
@@ -949,9 +1126,10 @@ h1 .soft{color:rgba(28,31,34,.56)}
     });
   });
   function card_peel_staggered(c){
+    c.classList.remove('lift');
     c.classList.add('peeled');
     c.setAttribute('aria-expanded','true');
-    placeCurl(c, true);
+    placeCurl(c, 'peeled');
     popAt(c, 26, 620);
     update();
   }

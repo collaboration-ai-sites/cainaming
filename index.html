@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Meet the family — NetworkOS name reveal</title>
-<meta name="description" content="Collaboration.Ai product naming reveal: NetworkOS Source, Intelligence, Acquire, Decide.">
+<meta name="description" content="Collaboration.Ai new product names: NetworkOS Source, Intelligence, Acquire, and Decide. A system of action, not a system of record.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   CAI DESIGN TOKENS — carried over from the July 30 all-hands
+   CAI DESIGN TOKENS
    ============================================================ */
 :root{
   --ink:#1C1F22;
@@ -69,29 +69,19 @@ body{
    ============================================================ */
 .hero{padding:74px 0 26px}
 .hero .eyebrow{margin-bottom:26px}
-.callback{
-  display:inline-block;
-  border-left:3px solid var(--accent);
-  padding:6px 0 6px 16px;
-  margin:0 0 30px;
-  max-width:640px;
-}
-.callback p{
-  margin:0;
-  font-size:clamp(17px,2.2vw,20px);
-  font-weight:500;
-  letter-spacing:-.01em;
-}
-.callback cite{
-  display:block;
-  margin-top:8px;
+.stamp-chip{
+  display:inline-flex;align-items:center;gap:11px;
   font-family:"IBM Plex Mono",ui-monospace,monospace;
-  font-size:11px;
-  letter-spacing:.13em;
-  text-transform:uppercase;
-  font-style:normal;
-  color:var(--ink-45);
+  font-size:11px;letter-spacing:.17em;text-transform:uppercase;
+  color:var(--ink);
+  background:rgba(255,255,255,.55);
+  border:1.5px solid var(--ink);
+  border-radius:var(--r-pill);
+  padding:10px 24px;
+  transform:rotate(-1.2deg);
+  margin:0 0 30px;
 }
+.stamp-chip i{display:block;width:8px;height:8px;background:var(--accent);border-radius:99px 2px 99px 2px}
 h1{
   font-size:clamp(30px,5.4vw,58px);
   line-height:1.06;
@@ -412,58 +402,69 @@ h1 .soft{color:rgba(28,31,34,.56)}
   font-size:clamp(17px,2vw,21px);font-weight:500;letter-spacing:-.015em;
 }
 
-/* pipeline */
-.mech{margin-top:72px}
-.mech h3{
-  font-size:clamp(20px,2.6vw,27px);letter-spacing:-.03em;margin:0 0 8px;font-weight:600;
+/* messaging */
+.msg{margin-top:76px}
+.msg h3{
+  font-size:clamp(20px,2.7vw,29px);letter-spacing:-.032em;margin:0 0 8px;font-weight:700;line-height:1.1;
 }
-.mech .note{margin:0 0 34px;color:var(--ink-70);max-width:52ch}
-.gantt{
-  display:grid;
-  grid-template-columns:repeat(6,minmax(0,1fr));
-  gap:10px 8px;
-  align-items:stretch;
+.msg .note{margin:0;color:var(--ink-70);max-width:50ch}
+.nots{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin:32px 0 0;
 }
-.stage{
-  grid-row:1;
-  padding:11px 8px 13px;
-  border-top:2px solid var(--ink);
-  font-family:"IBM Plex Mono",ui-monospace,monospace;
-  font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-70);
-  position:relative;
-}
-.stage::before{
-  content:"";position:absolute;left:0;top:-5px;width:8px;height:8px;
-  background:var(--ink);border-radius:99px 2px 99px 2px;
-}
-.span{
-  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
-  padding:14px 18px;
-  border-radius:var(--r-md);
-  background:rgba(255,255,255,.7);
+.not{
+  background:rgba(255,255,255,.72);
   border:1px solid var(--ink-14);
-  border-left:4px solid var(--accent);
+  border-radius:var(--r-md);
+  padding:22px 22px 25px;
 }
-.span .s-name{font-weight:700;letter-spacing:-.02em;font-size:clamp(15px,1.6vw,18px)}
-.span .s-range{
+.not .lbl{
   font-family:"IBM Plex Mono",ui-monospace,monospace;
-  font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45);
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-45);
 }
-.span.wide{border-left-color:var(--accent-deep)}
-.span.loop{
-  background:var(--ink);color:var(--paper);border-color:var(--ink);border-left-color:var(--accent);
+.not .strike{
+  margin:11px 0 17px;
+  font-size:clamp(19px,2.1vw,25px);font-weight:700;letter-spacing:-.032em;line-height:1.22;
 }
-.span.loop .s-range{color:rgba(242,240,236,.6)}
-.s1{grid-row:2;grid-column:1/3}
-.s2{grid-row:3;grid-column:3/7}
-.s3{grid-row:4;grid-column:4/6}
-.s4{grid-row:5;grid-column:1/7}
-.onesystem{
-  margin:34px 0 0;
-  font-size:clamp(16px,1.8vw,19px);
-  max-width:56ch;color:var(--ink-70);
+.not .strike span{
+  display:inline;
+  background-image:linear-gradient(var(--ink),var(--ink));
+  background-repeat:no-repeat;
+  background-position:0 60%;
+  background-size:0% 4px;
+  -webkit-box-decoration-break:clone;
+  box-decoration-break:clone;
+  transition:background-size .6s var(--ease-bounce);
 }
-.onesystem b{color:var(--ink);font-weight:600}
+.finale.show .not:nth-child(1) .strike span{background-size:100% 4px;transition-delay:1.05s}
+.finale.show .not:nth-child(2) .strike span{background-size:100% 4px;transition-delay:1.22s}
+.finale.show .not:nth-child(3) .strike span{background-size:100% 4px;transition-delay:1.39s}
+.not p{margin:0;color:var(--ink-70);font-size:clamp(14px,1.45vw,16px);line-height:1.52}
+.not p b{color:var(--ink);font-weight:600}
+
+.stamp{
+  display:inline-block;
+  margin:52px 0 0;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:clamp(12.5px,1.5vw,16px);letter-spacing:.19em;text-transform:uppercase;font-weight:600;
+  color:var(--ink);
+  padding:15px 26px;
+  border:2px solid var(--ink);
+  outline:1px solid var(--ink);
+  outline-offset:5px;
+  border-radius:var(--r-sm);
+  transform:rotate(-2.6deg);
+}
+.finale.show .stamp{animation:thud .62s var(--ease-bounce) 1.68s both}
+@keyframes thud{
+  0%{opacity:0;transform:rotate(-9deg) scale(1.55)}
+  58%{opacity:1;transform:rotate(-1.2deg) scale(.955)}
+  100%{opacity:1;transform:rotate(-2.6deg) scale(1)}
+}
+.roofpara{
+  margin:30px 0 0;max-width:64ch;
+  font-size:clamp(16px,1.75vw,19px);line-height:1.55;color:var(--ink-70);
+}
+.roofpara b{color:var(--ink);font-weight:600}
 
 /* ============================================================
    CLOSING
@@ -503,19 +504,7 @@ h1 .soft{color:rgba(28,31,34,.56)}
 @media (max-width:860px){
   .grid{grid-template-columns:1fr;gap:20px}
   .card{aspect-ratio:auto;min-height:332px}
-  .gantt{grid-template-columns:1fr;gap:8px}
-  .stage{grid-row:auto!important;grid-column:1/-1!important;border-top:none;border-left:2px solid var(--ink);padding:6px 0 6px 14px}
-  .stage::before{left:-5px;top:8px}
-  .span{grid-row:auto!important;grid-column:1/-1!important}
-  .s1{order:1}.s2{order:2}.s3{order:3}.s4{order:4}
-  .gantt .stage{display:none}
-  .gantt::before{
-    content:"demand signal → topic released → proposals in → evaluation → selection → award to fielded";
-    display:block;grid-column:1/-1;
-    font-family:"IBM Plex Mono",ui-monospace,monospace;
-    font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-45);
-    border-left:2px solid var(--ink);padding:8px 0 8px 14px;margin-bottom:6px;line-height:1.7;
-  }
+  .nots{grid-template-columns:1fr;gap:16px}
 }
 @media (max-width:600px){
   body{font-size:16px}
@@ -540,6 +529,9 @@ h1 .soft{color:rgba(28,31,34,.56)}
   .mini{opacity:1;transform:none}
   .finale{transition:opacity .3s linear}
   .finale.show .mini{animation:none;opacity:1;transform:none}
+  .not .strike span{background-size:100% 4px!important;transition:none}
+  .finale.show .stamp{animation:none;opacity:1;transform:rotate(-2.6deg)}
+  .stamp-chip{transform:none}
   #confetti{display:none}
 }
 </style>
@@ -551,13 +543,10 @@ h1 .soft{color:rgba(28,31,34,.56)}
 <!-- ============ OPENING BEAT ============ -->
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">Collaboration.Ai · product naming · August 2026</div>
-    <blockquote class="callback">
-      <p>“We are a system of action, not a system of record.”</p>
-      <cite>All-hands, July 30</cite>
-    </blockquote>
-    <h1>Five weeks ago, we told you what we are. <span class="soft">Today, what we're called finally matches it.</span></h1>
-    <p class="lede">Four products, four new name tags. Peel one and see who's actually under there.</p>
+    <div class="eyebrow">Collaboration.Ai · new product names · August 2026</div>
+    <div class="stamp-chip"><i aria-hidden="true"></i> a system of action, not a system of record</div>
+    <h1>We got everybody name tags.</h1>
+    <p class="lede">Four products, four new names, one family. Peel one and see who's actually under there.</p>
   </div>
 </header>
 
@@ -759,38 +748,32 @@ h1 .soft{color:rgba(28,31,34,.56)}
 
     <p class="warm">Same last name. Everyone finally knows where they sit.</p>
 
-    <!-- pipeline mechanics -->
-    <div class="mech">
-      <h3>And here's the part that isn't a rebrand.</h3>
-      <p class="note">One pipeline, start to finish. Each name covers a real stretch of it — and the stretches connect.</p>
+    <!-- messaging -->
+    <div class="msg">
+      <h3>Since everyone's here: three things we're still not.</h3>
+      <p class="note">The names changed. This part didn't.</p>
 
-      <div class="gantt">
-        <div class="stage">demand signal</div>
-        <div class="stage">topic released</div>
-        <div class="stage">proposals in</div>
-        <div class="stage">evaluation</div>
-        <div class="stage">selection</div>
-        <div class="stage">award to fielded</div>
-
-        <div class="span s1">
-          <span class="s-name">Source</span>
-          <span class="s-range">demand signal → topic released</span>
+      <div class="nots">
+        <div class="not">
+          <div class="lbl">we're not</div>
+          <div class="strike"><span>an intelligence tool</span></div>
+          <p>Intelligence platforms analyze what already exists and hand you insight. We don't stop there. We carry it to a fielded outcome.</p>
         </div>
-        <div class="span wide s2">
-          <span class="s-name">Acquire</span>
-          <span class="s-range">proposals in → award to fielded</span>
+        <div class="not">
+          <div class="lbl">we're not</div>
+          <div class="strike"><span>a system of record</span></div>
+          <p>A system of record tracks that a milestone happened. <b>We're a system of action. We make the next milestone happen.</b></p>
         </div>
-        <div class="span s3">
-          <span class="s-name">Decide</span>
-          <span class="s-range">evaluation → selection</span>
-        </div>
-        <div class="span loop s4">
-          <span class="s-name">Intelligence</span>
-          <span class="s-range">carries all six forward → into the next demand signal</span>
+        <div class="not">
+          <div class="lbl">we're not</div>
+          <div class="strike"><span>just an internal knowledge tool</span></div>
+          <p>Organizing what you already have is the easy part. We also reach outside your walls for what's missing.</p>
         </div>
       </div>
 
-      <p class="onesystem">Read it top to bottom: <b>Source</b> opens the aperture and gets a topic out the door. <b>Acquire</b> runs the whole solicitation through to something fielded. <b>Decide</b> sits inside it, making evaluation and selection defensible. <b>Intelligence</b> keeps every bit of it, so the next cycle starts where this one ended. Four names, one system.</p>
+      <div class="stamp">System of action</div>
+
+      <p class="roofpara">Defense and government organizations face problems that are both urgent and genuinely difficult, while the knowledge to solve them sits scattered: locked inside programs, carried by people who rotate out before momentum builds, or sitting entirely outside their walls in industry and academia. Collaboration.Ai closes that distance. We connect what exists to what's needed, and we don't stop at insight or a recommendation that still needs someone else to execute it. <b>We stay with it until there's a fielded outcome.</b></p>
     </div>
   </section>
 

@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meet the family — NetworkOS name reveal</title>
+<meta name="description" content="Collaboration.Ai product naming reveal: NetworkOS Source, Intelligence, Acquire, Decide.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   CAI DESIGN TOKENS — carried over from the July 30 all-hands
+   ============================================================ */
+:root{
+  --ink:#1C1F22;
+  --paper:#F2F0EC;
+  --accent:#8FB8C9;
+
+  --ink-70:rgba(28,31,34,.70);
+  --ink-45:rgba(28,31,34,.45);
+  --ink-14:rgba(28,31,34,.14);
+  --ink-08:rgba(28,31,34,.08);
+  --accent-soft:#D9E7EE;
+  --accent-deep:#5E8DA1;
+
+  /* asymmetric corners — never uniform */
+  --r-lg: 34px 6px 34px 6px;
+  --r-md: 22px 4px 22px 4px;
+  --r-sm: 14px 3px 14px 3px;
+  --r-pill: 999px 8px 999px 8px;
+
+  --ease-bounce: cubic-bezier(.22,1.28,.32,1);
+  --ease-out: cubic-bezier(.2,.8,.2,1);
+  --ease-peel: cubic-bezier(.52,.04,.26,1.055);
+
+  --maxw: 1120px;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Space Grotesk",system-ui,-apple-system,sans-serif;
+  font-size:17px;
+  line-height:1.5;
+  overflow-x:hidden;
+  /* faint paper texture */
+  background-image:
+    radial-gradient(circle at 18% 12%, rgba(143,184,201,.16), transparent 46%),
+    radial-gradient(circle at 86% 78%, rgba(143,184,201,.12), transparent 50%);
+  background-attachment:fixed;
+}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:11.5px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--ink-45);
+}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+
+/* ============================================================
+   OPENING BEAT
+   ============================================================ */
+.hero{padding:74px 0 26px}
+.hero .eyebrow{margin-bottom:26px}
+.callback{
+  display:inline-block;
+  border-left:3px solid var(--accent);
+  padding:6px 0 6px 16px;
+  margin:0 0 30px;
+  max-width:640px;
+}
+.callback p{
+  margin:0;
+  font-size:clamp(17px,2.2vw,20px);
+  font-weight:500;
+  letter-spacing:-.01em;
+}
+.callback cite{
+  display:block;
+  margin-top:8px;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:11px;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  font-style:normal;
+  color:var(--ink-45);
+}
+h1{
+  font-size:clamp(30px,5.4vw,58px);
+  line-height:1.06;
+  letter-spacing:-.032em;
+  font-weight:700;
+  margin:0 0 20px;
+  max-width:20ch;
+}
+h1 .soft{color:rgba(28,31,34,.56)}
+.lede{
+  max-width:52ch;
+  font-size:clamp(16px,1.7vw,19px);
+  color:var(--ink-70);
+  margin:0;
+}
+
+/* ============================================================
+   CONTROL BAR
+   ============================================================ */
+.bar{
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+  margin:46px 0 24px;
+  padding:14px 18px;
+  background:rgba(255,255,255,.55);
+  border:1px solid var(--ink-14);
+  border-radius:var(--r-md);
+}
+.count{display:flex;align-items:center;gap:10px;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-70)}
+.pips{display:flex;gap:6px}
+.pip{width:10px;height:10px;border:1.5px solid var(--ink-45);border-radius:99px 2px 99px 2px;transition:background .3s var(--ease-out),border-color .3s}
+.pip.on{background:var(--accent);border-color:var(--accent-deep)}
+.spacer{flex:1 1 auto}
+.btn{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink);color:var(--paper);
+  border:1px solid var(--ink);
+  padding:11px 20px;
+  border-radius:var(--r-pill);
+  cursor:pointer;
+  transition:transform .25s var(--ease-bounce),background .2s,color .2s,opacity .2s;
+}
+.btn:hover{transform:translateY(-2px) rotate(-.6deg)}
+.btn:active{transform:translateY(0) scale(.98)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--paper)}
+.btn[disabled]{opacity:.34;cursor:default;transform:none!important}
+
+:where(a,button,.card):focus-visible{
+  outline:3px solid var(--accent-deep);
+  outline-offset:4px;
+  border-radius:6px;
+}
+
+/* ============================================================
+   THE REVEAL — NAME TAG CARDS
+   ============================================================ */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:26px;
+  padding-bottom:10px;
+}
+.card{
+  position:relative;
+  display:block;
+  width:100%;
+  aspect-ratio:1.22/1;
+  padding:0;
+  margin:0;
+  border:none;
+  background:transparent;
+  cursor:pointer;
+  font:inherit;
+  color:inherit;
+  text-align:left;
+  -webkit-tap-highlight-color:transparent;
+}
+.card-inner{
+  display:block;
+  position:relative;
+  width:100%;height:100%;
+  overflow:hidden;
+  border-radius:var(--r-lg);
+  background:var(--paper);
+  border:1px solid var(--ink-14);
+  box-shadow:0 2px 0 var(--ink-08), 0 18px 40px -28px rgba(28,31,34,.5);
+  transition:box-shadow .4s var(--ease-out),transform .4s var(--ease-bounce);
+}
+.card:hover .card-inner{transform:translateY(-3px)}
+.card.peeled .card-inner{box-shadow:0 2px 0 var(--ink-08), 0 26px 54px -30px rgba(94,141,161,.65)}
+
+/* ---------- underneath: the real name ---------- */
+.under{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  padding:clamp(20px,3.2vw,32px);
+  background:
+    linear-gradient(160deg,#FFFFFF 0%, var(--paper) 58%, var(--accent-soft) 140%);
+  opacity:0;
+  transition:opacity .45s var(--ease-out) .18s;
+}
+.card.peeled .under{opacity:1}
+.under-eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-45);
+}
+.badge-head{
+  margin-top:auto;
+  display:flex;flex-direction:column;align-items:flex-start;gap:14px;
+}
+.icon{
+  flex:0 0 auto;
+  width:clamp(40px,5.4vw,54px);height:clamp(40px,5.4vw,54px);
+  display:grid;place-items:center;
+  color:var(--accent-deep);
+  background:rgba(255,255,255,.8);
+  border:1px solid var(--ink-14);
+  border-radius:var(--r-sm);
+}
+.icon svg{width:70%;height:70%}
+.realname{
+  margin:0;
+  font-size:clamp(23px,3.2vw,33px);
+  line-height:1.02;
+  font-weight:700;
+  letter-spacing:-.035em;
+  position:relative;
+  transform-origin:left bottom;
+}
+/* marker-style lettering: heavy, slightly hand-set, inky underline */
+.realname span{display:inline-block;transform:rotate(-1.1deg)}
+.realname::after{
+  content:"";
+  position:absolute;left:-2px;right:-6px;bottom:-9px;height:8px;
+  background:var(--accent);
+  border-radius:99px 40px 99px 30px;
+  transform:scaleX(0) rotate(-.7deg);
+  transform-origin:left center;
+  opacity:.85;
+  transition:transform .6s var(--ease-bounce) .95s;
+}
+.card.peeled .realname::after{transform:scaleX(1) rotate(-.7deg)}
+.caption{
+  margin:26px 0 0;
+  font-size:clamp(13.5px,1.42vw,15.5px);
+  line-height:1.48;
+  color:var(--ink-70);
+  max-width:34ch;
+}
+.card.peeled .badge-head{animation:settle .76s var(--ease-bounce) .5s both}
+@keyframes settle{
+  0%{transform:translateY(14px) scale(.92) rotate(-2deg);opacity:.2}
+  62%{transform:translateY(-4px) scale(1.035) rotate(.6deg);opacity:1}
+  100%{transform:none;opacity:1}
+}
+
+/* ---------- the sticker on top ---------- */
+.sticker{position:absolute;inset:0;pointer-events:none}
+.sticker-face{
+  position:absolute;inset:0;
+  padding:clamp(18px,2.8vw,26px);
+  display:flex;flex-direction:column;
+  background:#fff;
+  /* the peel: a diagonal cut travelling from bottom-right to top-left */
+  clip-path:polygon(0 0, 212% 0, 0 212%);
+  transition:clip-path 1.08s var(--ease-peel);
+}
+.card.peeled .sticker-face{clip-path:polygon(0 0, 0 0, 0 0)}
+.hello-band{
+  margin:calc(clamp(18px,2.8vw,26px) * -1) calc(clamp(18px,2.8vw,26px) * -1) 0;
+  padding:14px 22px 12px;
+  background:var(--accent);
+  color:var(--ink);
+  border-bottom:1px dashed rgba(28,31,34,.28);
+}
+.hello-band b{
+  display:block;
+  font-size:clamp(20px,2.7vw,27px);
+  font-weight:700;letter-spacing:.13em;line-height:1;
+}
+.hello-band em{
+  display:block;margin-top:5px;font-style:normal;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:rgba(28,31,34,.68);
+}
+.written{
+  margin:auto 0;
+  font-size:clamp(15px,1.8vw,18.5px);
+  color:var(--ink-70);
+  line-height:1.35;
+}
+.written b{
+  display:block;margin-top:8px;
+  color:var(--ink);
+  font-size:clamp(19px,2.5vw,26px);
+  font-weight:600;letter-spacing:-.02em;line-height:1.12;
+}
+/* ruled writing line, like a real name tag */
+.written::after{
+  content:"";display:block;margin-top:14px;height:1px;
+  background:repeating-linear-gradient(90deg,var(--ink-14) 0 10px,transparent 10px 16px);
+}
+.hint{
+  position:absolute;left:clamp(18px,2.8vw,26px);bottom:clamp(16px,2.4vw,22px);
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-45);
+}
+.card:hover .hint{color:var(--accent-deep)}
+/* card 4: no predecessor, hand-lettered */
+.card.fresh .written b{
+  transform:rotate(-2.2deg) skewX(-7deg);
+  transform-origin:left center;
+  font-weight:700;
+  letter-spacing:-.005em;
+  font-size:clamp(22px,3vw,31px);
+}
+.card.fresh .written .pre{opacity:0}
+
+/* ---------- the curling corner ---------- */
+.curl{
+  position:absolute;left:0;top:0;
+  width:230%;height:38px;
+  transform:translate(-50%,-50%) rotate(-45deg) translateY(-1000px);
+  transform-origin:50% 50%;
+  background:
+    linear-gradient(to bottom,
+      rgba(28,31,34,.30) 0 1.5px,
+      #ffffff 1.5px,
+      #f6f4f0 34%,
+      #e2ded6 78%,
+      #cfcac1 100%);
+  border-radius:0 0 10px 10px / 0 0 26px 26px;
+  box-shadow:0 16px 26px -10px rgba(28,31,34,.42), 0 2px 0 rgba(255,255,255,.6) inset;
+  transition:transform 1.08s var(--ease-peel);
+  pointer-events:none;
+}
+.curl::after{ /* soft sheen on the folded backside */
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(105deg,transparent 0 30%,rgba(255,255,255,.7) 46%,transparent 62%);
+  border-radius:inherit;
+}
+
+/* ============================================================
+   FINALE — MEET THE FAMILY
+   ============================================================ */
+.finale{
+  margin-top:78px;
+  opacity:0;
+  transform:translateY(26px);
+  pointer-events:none;
+  transition:opacity .8s var(--ease-out),transform .9s var(--ease-bounce);
+}
+.finale.show{opacity:1;transform:none;pointer-events:auto}
+.rule{height:1px;background:var(--ink-14);margin:0 0 44px}
+.finale h2{
+  font-size:clamp(28px,4.6vw,48px);
+  letter-spacing:-.035em;line-height:1.05;font-weight:700;margin:0 0 14px;
+}
+.finale .sub{margin:0 0 40px;color:var(--ink-70);max-width:46ch;font-size:clamp(16px,1.7vw,19px)}
+
+/* group photo */
+.photo{
+  background:#fff;
+  border:1px solid var(--ink-14);
+  border-radius:var(--r-lg);
+  padding:clamp(22px,3.4vw,40px) clamp(16px,3vw,34px) clamp(18px,2.4vw,26px);
+  box-shadow:0 26px 60px -40px rgba(28,31,34,.6);
+}
+.lineup{
+  display:flex;justify-content:center;align-items:flex-end;
+  gap:clamp(4px,1.4vw,16px);
+  flex-wrap:wrap;
+}
+.mini{
+  flex:1 1 150px;max-width:230px;min-width:132px;
+  background:var(--paper);
+  border:1px solid var(--ink-14);
+  border-radius:var(--r-md);
+  padding:16px 15px 15px;
+  opacity:0;
+  transform:translateY(22px) scale(.9);
+}
+.finale.show .mini{animation:popin .8s var(--ease-bounce) both}
+.finale.show .mini:nth-child(1){animation-delay:.18s}
+.finale.show .mini:nth-child(2){animation-delay:.30s}
+.finale.show .mini:nth-child(3){animation-delay:.42s}
+.finale.show .mini:nth-child(4){animation-delay:.54s}
+@keyframes popin{
+  0%{opacity:0;transform:translateY(24px) scale(.88) rotate(0)}
+  70%{opacity:1;transform:translateY(-5px) scale(1.03) rotate(var(--tilt,0deg))}
+  100%{opacity:1;transform:none;transform:rotate(var(--tilt,0deg))}
+}
+.mini:nth-child(1){--tilt:-2.6deg}
+.mini:nth-child(2){--tilt:1.6deg}
+.mini:nth-child(3){--tilt:-1.2deg}
+.mini:nth-child(4){--tilt:2.4deg}
+.mini:hover{transform:rotate(0deg) translateY(-4px);transition:transform .35s var(--ease-bounce)}
+.mini .m-band{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink-45);
+  padding-bottom:9px;margin-bottom:11px;
+  border-bottom:1px dashed var(--ink-14);
+}
+.mini .m-row{display:flex;align-items:center;gap:9px}
+.mini .m-icon{width:26px;height:26px;flex:0 0 auto;color:var(--accent-deep)}
+.mini .m-icon svg{width:100%;height:100%}
+.mini .m-name{font-weight:700;letter-spacing:-.028em;font-size:clamp(15px,1.6vw,18px);line-height:1.05}
+.mini .m-name small{display:block;font-weight:500;font-size:11px;letter-spacing:.02em;color:var(--ink-45);margin-bottom:1px}
+.photo-cap{
+  margin:clamp(18px,2.4vw,26px) 0 0;text-align:center;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-45);
+}
+.warm{
+  margin:34px auto 0;max-width:44ch;text-align:center;
+  font-size:clamp(17px,2vw,21px);font-weight:500;letter-spacing:-.015em;
+}
+
+/* pipeline */
+.mech{margin-top:72px}
+.mech h3{
+  font-size:clamp(20px,2.6vw,27px);letter-spacing:-.03em;margin:0 0 8px;font-weight:600;
+}
+.mech .note{margin:0 0 34px;color:var(--ink-70);max-width:52ch}
+.gantt{
+  display:grid;
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:10px 8px;
+  align-items:stretch;
+}
+.stage{
+  grid-row:1;
+  padding:11px 8px 13px;
+  border-top:2px solid var(--ink);
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-70);
+  position:relative;
+}
+.stage::before{
+  content:"";position:absolute;left:0;top:-5px;width:8px;height:8px;
+  background:var(--ink);border-radius:99px 2px 99px 2px;
+}
+.span{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:14px 18px;
+  border-radius:var(--r-md);
+  background:rgba(255,255,255,.7);
+  border:1px solid var(--ink-14);
+  border-left:4px solid var(--accent);
+}
+.span .s-name{font-weight:700;letter-spacing:-.02em;font-size:clamp(15px,1.6vw,18px)}
+.span .s-range{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45);
+}
+.span.wide{border-left-color:var(--accent-deep)}
+.span.loop{
+  background:var(--ink);color:var(--paper);border-color:var(--ink);border-left-color:var(--accent);
+}
+.span.loop .s-range{color:rgba(242,240,236,.6)}
+.s1{grid-row:2;grid-column:1/3}
+.s2{grid-row:3;grid-column:3/7}
+.s3{grid-row:4;grid-column:4/6}
+.s4{grid-row:5;grid-column:1/7}
+.onesystem{
+  margin:34px 0 0;
+  font-size:clamp(16px,1.8vw,19px);
+  max-width:56ch;color:var(--ink-70);
+}
+.onesystem b{color:var(--ink);font-weight:600}
+
+/* ============================================================
+   CLOSING
+   ============================================================ */
+.closing{
+  margin:96px 0 0;
+  padding:clamp(56px,9vw,120px) 0 clamp(64px,10vw,132px);
+  border-top:1px solid var(--ink-14);
+  opacity:0;transform:translateY(18px);
+  transition:opacity .9s var(--ease-out),transform .9s var(--ease-out);
+}
+.closing.show{opacity:1;transform:none}
+.roof{
+  margin:22px 0 0;
+  font-size:clamp(23px,3.9vw,44px);
+  line-height:1.2;
+  letter-spacing:-.032em;
+  font-weight:600;
+  max-width:30ch;
+}
+.sig{
+  margin-top:clamp(38px,6vw,60px);
+  display:flex;align-items:center;gap:12px;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-45);
+}
+.sig .dot{width:9px;height:9px;background:var(--accent);border-radius:99px 2px 99px 2px}
+
+/* confetti canvas */
+#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:60}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:860px){
+  .grid{grid-template-columns:1fr;gap:20px}
+  .card{aspect-ratio:auto;min-height:332px}
+  .gantt{grid-template-columns:1fr;gap:8px}
+  .stage{grid-row:auto!important;grid-column:1/-1!important;border-top:none;border-left:2px solid var(--ink);padding:6px 0 6px 14px}
+  .stage::before{left:-5px;top:8px}
+  .span{grid-row:auto!important;grid-column:1/-1!important}
+  .s1{order:1}.s2{order:2}.s3{order:3}.s4{order:4}
+  .gantt .stage{display:none}
+  .gantt::before{
+    content:"demand signal → topic released → proposals in → evaluation → selection → award to fielded";
+    display:block;grid-column:1/-1;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-45);
+    border-left:2px solid var(--ink);padding:8px 0 8px 14px;margin-bottom:6px;line-height:1.7;
+  }
+}
+@media (max-width:600px){
+  body{font-size:16px}
+  .hero{padding:52px 0 18px}
+  .lineup{gap:10px}
+  .mini{flex:1 1 44%;min-width:0}
+  .mini .m-row{flex-direction:column;align-items:flex-start;gap:8px}
+  .mini .m-name{font-size:15px}
+}
+
+/* ============================================================
+   REDUCED MOTION — simple fades, no peel / bounce / confetti
+   ============================================================ */
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;animation-delay:0s!important;scroll-behavior:auto!important}
+  .sticker-face{transition:opacity .28s linear;clip-path:none}
+  .card.peeled .sticker-face{clip-path:none;opacity:0;visibility:hidden}
+  .curl{display:none}
+  .under{transition:opacity .28s linear}
+  .realname::after{transition:none;transform:scaleX(1) rotate(-.7deg)}
+  .card:hover .card-inner,.btn:hover{transform:none}
+  .mini{opacity:1;transform:none}
+  .finale{transition:opacity .3s linear}
+  .finale.show .mini{animation:none;opacity:1;transform:none}
+  #confetti{display:none}
+}
+</style>
+</head>
+<body>
+
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<!-- ============ OPENING BEAT ============ -->
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Collaboration.Ai · product naming · August 2026</div>
+    <blockquote class="callback">
+      <p>“We are a system of action, not a system of record.”</p>
+      <cite>All-hands, July 30</cite>
+    </blockquote>
+    <h1>Five weeks ago, we told you what we are. <span class="soft">Today, what we're called finally matches it.</span></h1>
+    <p class="lede">Four products, four new name tags. Peel one and see who's actually under there.</p>
+  </div>
+</header>
+
+<!-- ============ THE REVEAL ============ -->
+<main class="wrap">
+  <div class="bar">
+    <div class="count mono">
+      <span id="countText">0 of 4 peeled</span>
+      <span class="pips" aria-hidden="true">
+        <i class="pip"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i>
+      </span>
+    </div>
+    <span class="spacer"></span>
+    <button class="btn ghost" id="resetBtn" type="button">Stick them back</button>
+    <button class="btn" id="allBtn" type="button">Peel them all</button>
+  </div>
+
+  <div class="grid" id="grid">
+
+    <!-- 1 — SOURCE -->
+    <button class="card" type="button" aria-expanded="false">
+      <span class="card-inner">
+        <span class="under">
+          <span class="under-eyebrow">Say hello to</span>
+          <span class="badge-head">
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="16" cy="16" r="12.2"/>
+                <path d="M21.4 10.6 18 18l-7.4 3.4L14 14l7.4-3.4Z"/>
+                <path d="M16 1.6v2.6M16 27.8v2.6M1.6 16h2.6M27.8 16h2.6"/>
+              </svg>
+            </span>
+            <span class="realname"><span>NetworkOS Source</span></span>
+          </span>
+          <span class="caption">Opens the aperture beyond who you already know. From confidential internal ideas to challenges run openly across industry.</span>
+        </span>
+        <span class="sticker" aria-hidden="true">
+          <span class="sticker-face">
+            <span class="hello-band"><b>HELLO</b><em>my name is</em></span>
+            <span class="written"><span class="pre">Hi, I used to go by</span><b>CrowdVector / Innosabi Idea</b></span>
+            <span class="hint">click or tap to peel</span>
+          </span>
+          <span class="curl"></span>
+        </span>
+      </span>
+    </button>
+
+    <!-- 2 — INTELLIGENCE -->
+    <button class="card" type="button" aria-expanded="false">
+      <span class="card-inner">
+        <span class="under">
+          <span class="under-eyebrow">Say hello to</span>
+          <span class="badge-head">
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="6.4" cy="9" r="3.1"/><circle cx="25.6" cy="7.2" r="3.1"/>
+                <circle cx="16" cy="17.6" r="3.5"/>
+                <circle cx="8" cy="26.4" r="3.1"/><circle cx="25" cy="25.2" r="3.1"/>
+                <path d="M8.8 11.1l4.4 4.3M23.2 9.2l-4.6 6.2M13.6 20.1l-3.3 3.6M18.8 20l3.5 2.9M10.9 27.2h11.3"/>
+              </svg>
+            </span>
+            <span class="realname"><span>NetworkOS Intelligence</span></span>
+          </span>
+          <span class="caption">What your team already learned doesn't disappear when someone rotates out. Every cycle starts ahead of the last one.</span>
+        </span>
+        <span class="sticker" aria-hidden="true">
+          <span class="sticker-face">
+            <span class="hello-band"><b>HELLO</b><em>my name is</em></span>
+            <span class="written"><span class="pre">Hi, I used to go by</span><b>NetworkOS / NetworkOS Defense</b></span>
+            <span class="hint">click or tap to peel</span>
+          </span>
+          <span class="curl"></span>
+        </span>
+      </span>
+    </button>
+
+    <!-- 3 — ACQUIRE -->
+    <button class="card" type="button" aria-expanded="false">
+      <span class="card-inner">
+        <span class="under">
+          <span class="under-eyebrow">Say hello to</span>
+          <span class="badge-head">
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8.4 29.4V3.2"/>
+                <path d="M8.4 4.8h15.9l-2.9 5.6 2.9 5.6H8.4"/>
+                <path d="M5.6 29.4h5.6"/>
+              </svg>
+            </span>
+            <span class="realname"><span>NetworkOS Acquire</span></span>
+          </span>
+          <span class="caption">An award isn't the finish line. Acquire carries it end to end, solicitation to fielded outcome.</span>
+        </span>
+        <span class="sticker" aria-hidden="true">
+          <span class="sticker-face">
+            <span class="hello-band"><b>HELLO</b><em>my name is</em></span>
+            <span class="written"><span class="pre">Hi, I used to go by</span><b>CORE</b></span>
+            <span class="hint">click or tap to peel</span>
+          </span>
+          <span class="curl"></span>
+        </span>
+      </span>
+    </button>
+
+    <!-- 4 — DECIDE (new here) -->
+    <button class="card fresh" type="button" aria-expanded="false">
+      <span class="card-inner">
+        <span class="under">
+          <span class="under-eyebrow">Say hello to</span>
+          <span class="badge-head">
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 5.6v22.2M11 28.4h10"/>
+                <path d="M4.4 11.2h23.2"/>
+                <path d="M16 5.6a1.4 1.4 0 1 0 0 .1Z"/>
+                <path d="M4.4 11.2 1.4 18.4h6l-3-7.2Z"/>
+                <path d="M1.1 18.4a3.4 3.4 0 0 0 6.7 0"/>
+                <path d="M27.6 11.2l-3 7.2h6l-3-7.2Z"/>
+                <path d="M24.2 18.4a3.4 3.4 0 0 0 6.7 0"/>
+              </svg>
+            </span>
+            <span class="realname"><span>NetworkOS Decide</span></span>
+          </span>
+          <span class="caption">Gives evaluation rubrics, scoring, and panels a defensible audit trail from intake to award.</span>
+        </span>
+        <span class="sticker" aria-hidden="true">
+          <span class="sticker-face">
+            <span class="hello-band"><b>HELLO</b><em>my name is</em></span>
+            <span class="written"><span class="pre">&nbsp;</span><b>Hi, I'm new here!</b></span>
+            <span class="hint">click or tap to peel</span>
+          </span>
+          <span class="curl"></span>
+        </span>
+      </span>
+    </button>
+
+  </div>
+
+  <p class="sr" id="live" role="status" aria-live="polite"></p>
+
+  <!-- ============ FINALE ============ -->
+  <section class="finale" id="finale" aria-hidden="true">
+    <div class="rule"></div>
+    <h2>Meet the family.</h2>
+    <p class="sub">Four badges, four jobs, one room. Everybody line up.</p>
+
+    <div class="photo">
+      <div class="lineup">
+        <div class="mini">
+          <div class="m-band">hi, my name is</div>
+          <div class="m-row">
+            <span class="m-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="16" cy="16" r="12.2"/><path d="M21.4 10.6 18 18l-7.4 3.4L14 14l7.4-3.4Z"/>
+              </svg>
+            </span>
+            <span class="m-name"><small>NetworkOS</small>Source</span>
+          </div>
+        </div>
+        <div class="mini">
+          <div class="m-band">hi, my name is</div>
+          <div class="m-row">
+            <span class="m-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8.4 29.4V3.2"/><path d="M8.4 4.8h15.9l-2.9 5.6 2.9 5.6H8.4"/>
+              </svg>
+            </span>
+            <span class="m-name"><small>NetworkOS</small>Acquire</span>
+          </div>
+        </div>
+        <div class="mini">
+          <div class="m-band">hi, my name is</div>
+          <div class="m-row">
+            <span class="m-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 5.6v22.2M11 28.4h10M4.4 11.2h23.2"/>
+                <path d="M4.4 11.2 1.4 18.4h6l-3-7.2ZM27.6 11.2l-3 7.2h6l-3-7.2Z"/>
+              </svg>
+            </span>
+            <span class="m-name"><small>NetworkOS</small>Decide</span>
+          </div>
+        </div>
+        <div class="mini">
+          <div class="m-band">hi, my name is</div>
+          <div class="m-row">
+            <span class="m-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="6.4" cy="9" r="3.1"/><circle cx="25.6" cy="7.2" r="3.1"/><circle cx="16" cy="17.6" r="3.5"/>
+                <circle cx="8" cy="26.4" r="3.1"/><circle cx="25" cy="25.2" r="3.1"/>
+                <path d="M8.8 11.1l4.4 4.3M23.2 9.2l-4.6 6.2M13.6 20.1l-3.3 3.6M18.8 20l3.5 2.9M10.9 27.2h11.3"/>
+              </svg>
+            </span>
+            <span class="m-name"><small>NetworkOS</small>Intelligence</span>
+          </div>
+        </div>
+      </div>
+      <p class="photo-cap">Collaboration.Ai · the whole family, one system</p>
+    </div>
+
+    <p class="warm">Same last name. Everyone finally knows where they sit.</p>
+
+    <!-- pipeline mechanics -->
+    <div class="mech">
+      <h3>And here's the part that isn't a rebrand.</h3>
+      <p class="note">One pipeline, start to finish. Each name covers a real stretch of it — and the stretches connect.</p>
+
+      <div class="gantt">
+        <div class="stage">demand signal</div>
+        <div class="stage">topic released</div>
+        <div class="stage">proposals in</div>
+        <div class="stage">evaluation</div>
+        <div class="stage">selection</div>
+        <div class="stage">award to fielded</div>
+
+        <div class="span s1">
+          <span class="s-name">Source</span>
+          <span class="s-range">demand signal → topic released</span>
+        </div>
+        <div class="span wide s2">
+          <span class="s-name">Acquire</span>
+          <span class="s-range">proposals in → award to fielded</span>
+        </div>
+        <div class="span s3">
+          <span class="s-name">Decide</span>
+          <span class="s-range">evaluation → selection</span>
+        </div>
+        <div class="span loop s4">
+          <span class="s-name">Intelligence</span>
+          <span class="s-range">carries all six forward → into the next demand signal</span>
+        </div>
+      </div>
+
+      <p class="onesystem">Read it top to bottom: <b>Source</b> opens the aperture and gets a topic out the door. <b>Acquire</b> runs the whole solicitation through to something fielded. <b>Decide</b> sits inside it, making evaluation and selection defensible. <b>Intelligence</b> keeps every bit of it, so the next cycle starts where this one ended. Four names, one system.</p>
+    </div>
+  </section>
+
+  <!-- ============ CLOSING ============ -->
+  <section class="closing" id="closing">
+    <div class="eyebrow">The roof</div>
+    <p class="roof">Collaboration.Ai connects what exists to what's needed, and carries that knowledge through to solve an organization's most pressing problems.</p>
+    <div class="sig"><span class="dot" aria-hidden="true"></span> Collaboration.Ai · August 2026</div>
+  </section>
+</main>
+
+<script>
+(function(){
+  'use strict';
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var cards  = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var finale = document.getElementById('finale');
+  var closing= document.getElementById('closing');
+  var allBtn = document.getElementById('allBtn');
+  var resetBtn = document.getElementById('resetBtn');
+  var countText = document.getElementById('countText');
+  var pips = Array.prototype.slice.call(document.querySelectorAll('.pip'));
+  var live = document.getElementById('live');
+
+  /* ---------- curl placement: sits on the travelling diagonal ---------- */
+  function placeCurl(card, peeled){
+    var curl = card.querySelector('.curl');
+    if(!curl) return;
+    var box = card.querySelector('.card-inner').getBoundingClientRect();
+    var w = box.width, h = box.height;
+    if(!w || !h) return;
+    var ang = -Math.atan2(h, w) * 180 / Math.PI;   /* align with the cut edge */
+    var t = peeled ? -0.06 : 1.12;                 /* midpoint of the diagonal */
+    var x = t * w, y = t * h;
+    curl.style.transform = 'translate(-50%,-50%) translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) rotate(' + ang.toFixed(2) + 'deg)';
+  }
+  function placeAll(){
+    cards.forEach(function(c){ placeCurl(c, c.classList.contains('peeled')); });
+  }
+
+  /* ---------- confetti ---------- */
+  var cv = document.getElementById('confetti');
+  var ctx = cv.getContext('2d');
+  var bits = [], raf = null, dpr = 1;
+  var PALETTE = ['#8FB8C9','#1C1F22','#FFFFFF','#D9E7EE','#5E8DA1'];
+
+  function sizeCanvas(){
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    cv.width = Math.floor(window.innerWidth * dpr);
+    cv.height = Math.floor(window.innerHeight * dpr);
+  }
+  sizeCanvas();
+
+  function burst(x, y, n){
+    if(reduce.matches) return;
+    n = n || 34;
+    for(var i=0;i<n;i++){
+      var a = (Math.PI * 2) * (i/n) + Math.random()*0.5;
+      var sp = 3.2 + Math.random()*7.4;
+      bits.push({
+        x:x*dpr, y:y*dpr,
+        vx:Math.cos(a)*sp*dpr, vy:(Math.sin(a)*sp - 4.4)*dpr,
+        w:(4+Math.random()*7)*dpr, h:(3+Math.random()*4)*dpr,
+        rot:Math.random()*Math.PI, vr:(Math.random()-.5)*0.32,
+        c:PALETTE[(Math.random()*PALETTE.length)|0],
+        life:0, max:64+Math.random()*46
+      });
+    }
+    if(!raf) raf = requestAnimationFrame(tick);
+  }
+
+  function tick(){
+    ctx.clearRect(0,0,cv.width,cv.height);
+    for(var i=bits.length-1;i>=0;i--){
+      var b = bits[i];
+      b.life++;
+      b.vy += 0.29*dpr;
+      b.vx *= 0.988;
+      b.x += b.vx; b.y += b.vy; b.rot += b.vr;
+      var fade = Math.max(0, 1 - b.life/b.max);
+      ctx.save();
+      ctx.globalAlpha = fade;
+      ctx.translate(b.x, b.y);
+      ctx.rotate(b.rot);
+      ctx.fillStyle = b.c;
+      ctx.fillRect(-b.w/2, -b.h/2, b.w, b.h);
+      ctx.restore();
+      if(b.life >= b.max || b.y > cv.height + 60) bits.splice(i,1);
+    }
+    if(bits.length){ raf = requestAnimationFrame(tick); }
+    else { raf = null; ctx.clearRect(0,0,cv.width,cv.height); }
+  }
+
+  /* ---------- peel ---------- */
+  function popAt(card, n, delay){
+    if(reduce.matches) return;
+    setTimeout(function(){
+      var r = card.getBoundingClientRect();
+      if(r.bottom < -80 || r.top > window.innerHeight + 80) return;
+      burst(r.left + r.width*0.42, r.top + r.height*0.6, n);
+    }, delay || 0);
+  }
+
+  function peel(card, quiet){
+    if(card.classList.contains('peeled')) return;
+    card.classList.add('peeled');
+    card.setAttribute('aria-expanded','true');
+    placeCurl(card, true);
+    if(!quiet) popAt(card, 30, 620);
+    update();
+  }
+  function stick(card){
+    card.classList.remove('peeled');
+    card.setAttribute('aria-expanded','false');
+    placeCurl(card, false);
+  }
+
+  function update(){
+    var n = cards.filter(function(c){ return c.classList.contains('peeled'); }).length;
+    countText.textContent = n + ' of 4 peeled';
+    pips.forEach(function(p,i){ p.classList.toggle('on', i < n); });
+    allBtn.disabled = (n === 4);
+    resetBtn.disabled = (n === 0);
+    live.textContent = n === 4 ? 'All four names revealed. Meet the family.' : n + ' of 4 names revealed.';
+    if(n === 4) showFinale(); else hideFinale();
+  }
+
+  var finaleShown = false;
+  function showFinale(){
+    if(finaleShown) return;
+    finaleShown = true;
+    setTimeout(function(){
+      finale.classList.add('show');
+      finale.setAttribute('aria-hidden','false');
+      closing.classList.add('show');
+      if(!reduce.matches){
+        var r = finale.getBoundingClientRect();
+        burst(window.innerWidth*0.5, Math.max(120, Math.min(r.top+90, window.innerHeight*0.55)), 70);
+        setTimeout(function(){ burst(window.innerWidth*0.24, window.innerHeight*0.4, 26); }, 170);
+        setTimeout(function(){ burst(window.innerWidth*0.78, window.innerHeight*0.42, 26); }, 300);
+      }
+      try{
+        finale.scrollIntoView({behavior: reduce.matches ? 'auto' : 'smooth', block:'start'});
+      }catch(e){ finale.scrollIntoView(); }
+    }, reduce.matches ? 60 : 620);
+  }
+  function hideFinale(){
+    if(!finaleShown) return;
+    finaleShown = false;
+    finale.classList.remove('show');
+    finale.setAttribute('aria-hidden','true');
+    closing.classList.remove('show');
+  }
+
+  /* ---------- wiring ---------- */
+  cards.forEach(function(card){
+    card.addEventListener('click', function(){ peel(card); });
+    card.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar'){
+        e.preventDefault();
+        peel(card);
+      }
+    });
+  });
+
+  allBtn.addEventListener('click', function(){
+    var unpeeled = cards.filter(function(c){ return !c.classList.contains('peeled'); });
+    unpeeled.forEach(function(c,i){
+      setTimeout(function(){
+        card_peel_staggered(c);
+      }, reduce.matches ? 0 : i*210);
+    });
+  });
+  function card_peel_staggered(c){
+    c.classList.add('peeled');
+    c.setAttribute('aria-expanded','true');
+    placeCurl(c, true);
+    popAt(c, 26, 620);
+    update();
+  }
+
+  resetBtn.addEventListener('click', function(){
+    cards.forEach(stick);
+    update();
+    document.querySelector('.bar').scrollIntoView({behavior: reduce.matches ? 'auto':'smooth', block:'center'});
+  });
+
+  window.addEventListener('resize', function(){
+    sizeCanvas();
+    placeAll();
+  });
+
+  /* init */
+  placeAll();
+  requestAnimationFrame(placeAll);
+  window.addEventListener('load', placeAll);
+  update();
+})();
+</script>
+</body>
+</html>

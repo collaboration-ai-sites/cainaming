@@ -7,7 +7,7 @@
 <meta name="description" content="Collaboration.Ai new product names: NetworkOS Source, Intelligence, Acquire, and Decide. A system of action, not a system of record.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Permanent+Marker&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
    CAI DESIGN TOKENS
@@ -24,6 +24,8 @@
   --accent-soft:#D9E7EE;
   --accent-deep:#5E8DA1;
   --stamp-ink:#C23B2B;
+  --tag-red:#C23B2B;
+  --tag-red-rule:rgba(194,59,43,.34);
   /* per-product identity colours (ratified CAI palette) */
   --pc-source:#8FB8C9;   --pc-source-ink:#5E8DA1;   --pc-source-rgb:94,141,161;
   --pc-decide:#F7AE00;   --pc-decide-ink:#B27E00;   --pc-decide-rgb:178,126,0;
@@ -273,20 +275,22 @@ h1 .soft{color:rgba(28,31,34,.56)}
 .card:not(.peeled):focus-visible .sticker-face{clip-path:polygon(0 0, 181% 0, 0 181%)}
 .hello-band{
   margin:calc(clamp(18px,2.8vw,26px) * -1) calc(clamp(18px,2.8vw,26px) * -1) 0;
-  padding:14px 22px 12px;
-  background:var(--accent);
-  color:var(--ink);
-  border-bottom:1px dashed rgba(28,31,34,.28);
+  padding:15px 22px 13px;
+  background:var(--tag-red);
+  color:#fff;
+  border-bottom:3px solid rgba(255,255,255,.55);
+  box-shadow:0 1px 0 var(--tag-red);
 }
 .hello-band b{
   display:block;
-  font-size:clamp(20px,2.7vw,27px);
-  font-weight:700;letter-spacing:.13em;line-height:1;
+  font-size:clamp(21px,2.9vw,29px);
+  font-weight:700;letter-spacing:.15em;line-height:1;
+  color:#fff;
 }
 .hello-band em{
   display:block;margin-top:5px;font-style:normal;
   font-family:"IBM Plex Mono",ui-monospace,monospace;
-  font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:rgba(28,31,34,.68);
+  font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.92);
 }
 .written{
   margin:auto 0;
@@ -295,15 +299,18 @@ h1 .soft{color:rgba(28,31,34,.56)}
   line-height:1.35;
 }
 .written b{
-  display:block;margin-top:8px;
+  display:block;margin-top:10px;
   color:var(--ink);
-  font-size:clamp(19px,2.5vw,26px);
-  font-weight:600;letter-spacing:-.02em;line-height:1.12;
+  font-family:"Permanent Marker","Space Grotesk",cursive;
+  font-size:clamp(20px,2.65vw,28px);
+  font-weight:400;letter-spacing:.002em;line-height:1.22;
+  transform:rotate(-1deg);
+  transform-origin:left center;
 }
 /* ruled writing line, like a real name tag */
 .written::after{
   content:"";display:block;margin-top:14px;height:1px;
-  background:repeating-linear-gradient(90deg,var(--ink-14) 0 10px,transparent 10px 16px);
+  background:repeating-linear-gradient(90deg,var(--tag-red-rule) 0 12px,transparent 12px 18px);
 }
 .hint{
   position:absolute;left:clamp(18px,2.8vw,26px);bottom:clamp(16px,2.4vw,22px);
@@ -313,11 +320,8 @@ h1 .soft{color:rgba(28,31,34,.56)}
 .card:hover .hint{color:var(--accent-deep)}
 /* card 4: no predecessor, hand-lettered */
 .card.fresh .written b{
-  transform:rotate(-2.2deg) skewX(-7deg);
-  transform-origin:left center;
-  font-weight:700;
-  letter-spacing:-.005em;
-  font-size:clamp(22px,3vw,31px);
+  transform:rotate(-2deg);
+  font-size:clamp(22px,3.05vw,32px);
 }
 .card.fresh .written .pre{opacity:0}
 /* the new kid writes their own name tag */
@@ -789,7 +793,7 @@ h1 .soft{color:rgba(28,31,34,.56)}
         </span>
         <span class="sticker" aria-hidden="true">
           <span class="sticker-face">
-            <span class="hello-band"><b>HELLO</b><em>my name is</em></span>
+            <span class="hello-band"><b>HELLO</b><em>my name was</em></span>
             <span class="written"><span class="pre">Hi, I used to go by</span><b>CrowdVector / innosabi Idea</b></span>
             <span class="hint">click or tap to peel</span>
           </span>
@@ -818,7 +822,7 @@ h1 .soft{color:rgba(28,31,34,.56)}
         </span>
         <span class="sticker" aria-hidden="true">
           <span class="sticker-face">
-            <span class="hello-band"><b>HELLO</b><em>my name is</em></span>
+            <span class="hello-band"><b>HELLO</b><em>my name was</em></span>
             <span class="written"><span class="pre">Hi, I used to go by</span><b>NetworkOS / NetworkOS Defense</b></span>
             <span class="hint">click or tap to peel</span>
           </span>
@@ -846,7 +850,7 @@ h1 .soft{color:rgba(28,31,34,.56)}
         </span>
         <span class="sticker" aria-hidden="true">
           <span class="sticker-face">
-            <span class="hello-band"><b>HELLO</b><em>my name is</em></span>
+            <span class="hello-band"><b>HELLO</b><em>my name was</em></span>
             <span class="written"><span class="pre">Hi, I used to go by</span><b>CORE</b></span>
             <span class="hint">click or tap to peel</span>
           </span>

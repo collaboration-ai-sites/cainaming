@@ -24,6 +24,12 @@
   --accent-soft:#D9E7EE;
   --accent-deep:#5E8DA1;
   --stamp-ink:#C23B2B;
+  /* per-product identity colours (ratified CAI palette) */
+  --pc-source:#8FB8C9;   --pc-source-ink:#5E8DA1;   --pc-source-rgb:94,141,161;
+  --pc-decide:#F7AE00;   --pc-decide-ink:#B27E00;   --pc-decide-rgb:178,126,0;
+  --pc-acquire:#357266;  --pc-acquire-ink:#357266;  --pc-acquire-rgb:53,114,102;
+  --pc-intel:#003336;    --pc-intel-ink:#003336;    --pc-intel-rgb:0,51,54;
+
   --pending-ink:#8A5A0B;
   --pending-bg:rgba(214,158,46,.16);
   --pending-line:rgba(138,90,11,.38);
@@ -176,7 +182,12 @@ h1 .soft{color:rgba(28,31,34,.56)}
   transition:box-shadow .4s var(--ease-out),transform .4s var(--ease-bounce);
 }
 .card:hover .card-inner{transform:translateY(-3px)}
-.card.peeled .card-inner{box-shadow:0 2px 0 var(--ink-08), 0 26px 54px -30px rgba(94,141,161,.65)}
+.card.peeled .card-inner{box-shadow:0 2px 0 var(--ink-08), 0 26px 54px -30px rgba(var(--pc-rgb,94,141,161),.65)}
+
+.p-source {--pc:var(--pc-source); --pc-ink:var(--pc-source-ink); --pc-rgb:var(--pc-source-rgb)}
+.p-intel  {--pc:var(--pc-intel);  --pc-ink:var(--pc-intel-ink);  --pc-rgb:var(--pc-intel-rgb)}
+.p-acquire{--pc:var(--pc-acquire);--pc-ink:var(--pc-acquire-ink);--pc-rgb:var(--pc-acquire-rgb)}
+.p-decide {--pc:var(--pc-decide); --pc-ink:var(--pc-decide-ink); --pc-rgb:var(--pc-decide-rgb)}
 
 /* ---------- underneath: the real name ---------- */
 .under{
@@ -201,7 +212,7 @@ h1 .soft{color:rgba(28,31,34,.56)}
   flex:0 0 auto;
   width:clamp(40px,5.4vw,54px);height:clamp(40px,5.4vw,54px);
   display:grid;place-items:center;
-  color:var(--accent-deep);
+  color:var(--pc-ink,var(--accent-deep));
   background:rgba(255,255,255,.8);
   border:1px solid var(--ink-14);
   border-radius:var(--r-sm);
@@ -221,7 +232,7 @@ h1 .soft{color:rgba(28,31,34,.56)}
 .realname::after{
   content:"";
   position:absolute;left:-2px;right:-6px;bottom:-9px;height:8px;
-  background:var(--accent);
+  background:var(--pc,var(--accent));
   border-radius:99px 40px 99px 30px;
   transform:scaleX(0) rotate(-.7deg);
   transform-origin:left center;
@@ -474,7 +485,7 @@ h1 .soft{color:rgba(28,31,34,.56)}
   border-bottom:1px dashed var(--ink-14);
 }
 .mini .m-row{display:flex;align-items:center;gap:9px}
-.mini .m-icon{width:26px;height:26px;flex:0 0 auto;color:var(--accent-deep)}
+.mini .m-icon{width:26px;height:26px;flex:0 0 auto;color:var(--pc-ink,var(--accent-deep))}
 .mini .m-icon svg{width:100%;height:100%}
 .mini .m-name{font-weight:700;letter-spacing:-.028em;font-size:clamp(15px,1.6vw,18px);line-height:1.05}
 .mini .m-name small{display:block;font-weight:500;font-size:11px;letter-spacing:.02em;color:var(--ink-45);margin-bottom:1px}
@@ -495,7 +506,7 @@ h1 .soft{color:rgba(28,31,34,.56)}
 }
 .msg .note{margin:0;color:var(--ink-70);max-width:50ch}
 .nots{
-  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin:32px 0 0;
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin:32px 0 0;
 }
 .not{
   background:rgba(255,255,255,.72);
@@ -524,6 +535,7 @@ h1 .soft{color:rgba(28,31,34,.56)}
 .finale.show .not:nth-child(1) .strike span{background-size:100% 4px;transition-delay:1.05s}
 .finale.show .not:nth-child(2) .strike span{background-size:100% 4px;transition-delay:1.22s}
 .finale.show .not:nth-child(3) .strike span{background-size:100% 4px;transition-delay:1.39s}
+.finale.show .not:nth-child(4) .strike span{background-size:100% 4px;transition-delay:1.56s}
 .not p{margin:0;color:var(--ink-70);font-size:clamp(14px,1.45vw,16px);line-height:1.52}
 .not p b{color:var(--ink);font-weight:600}
 
@@ -759,7 +771,7 @@ h1 .soft{color:rgba(28,31,34,.56)}
   <div class="grid" id="grid">
 
     <!-- 1 — SOURCE -->
-    <button class="card" type="button" aria-expanded="false">
+    <button class="card p-source" type="button" aria-expanded="false">
       <span class="card-inner">
         <span class="under">
           <span class="under-eyebrow">Say hello to</span>
@@ -787,7 +799,7 @@ h1 .soft{color:rgba(28,31,34,.56)}
     </button>
 
     <!-- 2 — INTELLIGENCE -->
-    <button class="card" type="button" aria-expanded="false">
+    <button class="card p-intel" type="button" aria-expanded="false">
       <span class="card-inner">
         <span class="under">
           <span class="under-eyebrow">Say hello to</span>
@@ -816,7 +828,7 @@ h1 .soft{color:rgba(28,31,34,.56)}
     </button>
 
     <!-- 3 — ACQUIRE -->
-    <button class="card" type="button" aria-expanded="false">
+    <button class="card p-acquire" type="button" aria-expanded="false">
       <span class="card-inner">
         <span class="under">
           <span class="under-eyebrow">Say hello to</span>
@@ -844,7 +856,7 @@ h1 .soft{color:rgba(28,31,34,.56)}
     </button>
 
     <!-- 4 — DECIDE (new here) -->
-    <button class="card fresh" type="button" aria-expanded="false">
+    <button class="card fresh p-decide" type="button" aria-expanded="false">
       <span class="card-inner">
         <span class="under">
           <span class="under-eyebrow">Say hello to</span>
@@ -887,7 +899,7 @@ h1 .soft{color:rgba(28,31,34,.56)}
 
     <div class="photo">
       <div class="lineup">
-        <div class="mini">
+        <div class="mini p-source">
           <div class="m-band">hi, my name is</div>
           <div class="m-row">
             <span class="m-icon" aria-hidden="true">
@@ -898,7 +910,7 @@ h1 .soft{color:rgba(28,31,34,.56)}
             <span class="m-name"><small>NetworkOS</small>Source</span>
           </div>
         </div>
-        <div class="mini">
+        <div class="mini p-acquire">
           <div class="m-band">hi, my name is</div>
           <div class="m-row">
             <span class="m-icon" aria-hidden="true">
@@ -909,7 +921,7 @@ h1 .soft{color:rgba(28,31,34,.56)}
             <span class="m-name"><small>NetworkOS</small>Acquire</span>
           </div>
         </div>
-        <div class="mini">
+        <div class="mini p-decide">
           <div class="m-band">hi, my name is</div>
           <div class="m-row">
             <span class="m-icon" aria-hidden="true">
@@ -921,7 +933,7 @@ h1 .soft{color:rgba(28,31,34,.56)}
             <span class="m-name"><small>NetworkOS</small>Decide</span>
           </div>
         </div>
-        <div class="mini">
+        <div class="mini p-intel">
           <div class="m-band">hi, my name is</div>
           <div class="m-row">
             <span class="m-icon" aria-hidden="true">
@@ -942,10 +954,15 @@ h1 .soft{color:rgba(28,31,34,.56)}
 
     <!-- messaging -->
     <div class="msg">
-      <h3>Since everyone's here: three things we're still not.</h3>
+      <h3>Since everyone's here: four things we're still not.</h3>
       <p class="note">The names changed. This part didn't.</p>
 
       <div class="nots">
+        <div class="not">
+          <div class="lbl">we're not</div>
+          <div class="strike"><span>an innovation management system</span></div>
+          <p>Innovation management platforms end at a shortlist: challenges run, submissions scored, a pick made. We start there. Selection, execution, and what's learned all carry into the next cycle.</p>
+        </div>
         <div class="not">
           <div class="lbl">we're not</div>
           <div class="strike"><span>an intelligence tool</span></div>

@@ -395,13 +395,21 @@ h1 .soft{color:rgba(28,31,34,.56)}
    FINALE — MEET THE FAMILY
    ============================================================ */
 .finale{
-  margin-top:78px;
+  /* collapsed until revealed, so the FAQ below it is not behind dead space */
+  margin-top:0;
+  height:0;
+  overflow:hidden;
   opacity:0;
   transform:translateY(26px);
   pointer-events:none;
   transition:opacity .8s var(--ease-out),transform .9s var(--ease-bounce);
 }
-.finale.show{opacity:1;transform:none;pointer-events:auto}
+.finale.show{
+  margin-top:78px;
+  height:auto;
+  overflow:visible;
+  opacity:1;transform:none;pointer-events:auto;
+}
 .rule{height:1px;background:var(--ink-14);margin:0 0 44px}
 .finale h2{
   font-size:clamp(28px,4.6vw,48px);
@@ -581,13 +589,22 @@ h1 .soft{color:rgba(28,31,34,.56)}
    CLOSING
    ============================================================ */
 .closing{
-  margin:96px 0 0;
-  padding:clamp(56px,9vw,120px) 0 clamp(64px,10vw,132px);
-  border-top:1px solid var(--ink-14);
+  margin:0;
+  padding:0;
+  height:0;
+  overflow:hidden;
+  border-top:1px solid transparent;
   opacity:0;transform:translateY(18px);
   transition:opacity .9s var(--ease-out),transform .9s var(--ease-out);
 }
-.closing.show{opacity:1;transform:none}
+.closing.show{
+  margin:96px 0 0;
+  padding:clamp(56px,9vw,120px) 0 clamp(64px,10vw,132px);
+  height:auto;
+  overflow:visible;
+  border-top-color:var(--ink-14);
+  opacity:1;transform:none;
+}
 .roof{
   margin:22px 0 0;
   font-size:clamp(23px,3.9vw,44px);
@@ -625,7 +642,7 @@ h1 .soft{color:rgba(28,31,34,.56)}
 /* faq */
 .faq{
   margin:clamp(46px,7vw,72px) 0 0;
-  padding:clamp(34px,5vw,48px) 0 0;
+  padding:clamp(34px,5vw,48px) 0 clamp(72px,10vw,124px);
   border-top:1px solid var(--ink-14);
 }
 .faq h2{
@@ -892,31 +909,7 @@ h1 .soft{color:rgba(28,31,34,.56)}
 
   </div>
 
-  <!-- ============ FAQ ============ -->
-  <section class="faq" id="faq">
-    <div class="eyebrow">questions</div>
-    <h2>Things people have already asked.</h2>
 
-    <details class="qa">
-      <summary>Are we rebranding current programs, contracts, or statements of work that already reference the old names?<span class="pm" aria-hidden="true"></span></summary>
-      <div class="ans">Until we roll this out publicly (new website, sales assets, etc.), we won't rebrand anything in flight.</div>
-    </details>
-
-    <details class="qa">
-      <summary>Does this apply to commercial customers in Europe?<span class="pm" aria-hidden="true"></span></summary>
-      <div class="ans">Yes</div>
-    </details>
-
-    <details class="qa">
-      <summary>Are we going to make this public?<span class="pm" aria-hidden="true"></span></summary>
-      <div class="ans">Yes. We are working on a new website and updated sales assets (decks, etc.). We will likely use that as an opportunity to wrap in our product branding.</div>
-    </details>
-
-    <details class="qa">
-      <summary>What do I do with decks, one-pagers, or proposals that still use the old names?<span class="pm" aria-hidden="true"></span></summary>
-      <div class="ans">This depends on the audience. If it is an existing customer or prospect that knows our current lineup, then use the existing branding. For new prospects, it is a judgment call based on what they know about Collaboration.Ai (for example, if they are connected to AFWERX and have heard about CrowdVector, then we don't update anything). When in doubt, ask Jan and/or Anna.</div>
-    </details>
-  </section>
 
   <p class="sr" id="live" role="status" aria-live="polite"></p>
 
@@ -1022,7 +1015,31 @@ h1 .soft{color:rgba(28,31,34,.56)}
     <div class="sig"><span class="dot" aria-hidden="true"></span> Collaboration.Ai · August 2026</div>
   </section>
 
+  <!-- ============ FAQ ============ -->
+  <section class="faq" id="faq">
+    <div class="eyebrow">questions</div>
+    <h2>Things people have already asked.</h2>
 
+    <details class="qa">
+      <summary>Are we rebranding current programs, contracts, or statements of work that already reference the old names?<span class="pm" aria-hidden="true"></span></summary>
+      <div class="ans">Until we roll this out publicly (new website, sales assets, etc.), we won't rebrand anything in flight.</div>
+    </details>
+
+    <details class="qa">
+      <summary>Does this apply to commercial customers in Europe?<span class="pm" aria-hidden="true"></span></summary>
+      <div class="ans">Yes</div>
+    </details>
+
+    <details class="qa">
+      <summary>Are we going to make this public?<span class="pm" aria-hidden="true"></span></summary>
+      <div class="ans">Yes. We are working on a new website and updated sales assets (decks, etc.). We will likely use that as an opportunity to wrap in our product branding.</div>
+    </details>
+
+    <details class="qa">
+      <summary>What do I do with decks, one-pagers, or proposals that still use the old names?<span class="pm" aria-hidden="true"></span></summary>
+      <div class="ans">This depends on the audience. If it is an existing customer or prospect that knows our current lineup, then use the existing branding. For new prospects, it is a judgment call based on what they know about Collaboration.Ai (for example, if they are connected to AFWERX and have heard about CrowdVector, then we don't update anything). When in doubt, ask Jan and/or Anna.</div>
+    </details>
+  </section>
 </main>
 
 <script>
